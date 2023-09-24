@@ -4,11 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoDocs"
+        xmlns:resourceManager="clr-namespace:AutoDocs.Resources.ResourceManager"
         mc:Ignorable="d"
-        Title="MainWindow" WindowState="Maximized" WindowStyle="None">
+        Title="MainWindow" WindowState="Normal" WindowStyle="None">
 
     <Window.Resources>
-        <!-- Define your styles here -->
         <Style x:Key="TitleStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="36"/>
             <Setter Property="Foreground" Value="DodgerBlue"/>
@@ -34,25 +34,34 @@
 
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/> <!-- For the Title -->
-            <RowDefinition Height="*"/>   <!-- For the Description -->
-            <RowDefinition Height="Auto"/> <!-- For the Button -->
+            <RowDefinition Height="Auto"/>
+            <!-- Title & Logo -->
+            <RowDefinition Height="*"/>
+            <!-- Description -->
+            <RowDefinition Height="Auto"/>
+            <!-- Button -->
         </Grid.RowDefinitions>
 
         <!-- Title Section -->
         <Border Grid.Row="0" Padding="20" VerticalAlignment="Top" Background="White">
             <Grid>
-                <!-- Define columns: First column takes as much space as needed, Second column takes up the remaining space -->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-        
-                <!-- First Image on the left (in first column) -->
-                <Image Source="D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\bin\Resources\Autodoc_Title.png" Height="50" Margin="20"/>
-        
-                <!-- Second Image on the right (in second column) -->
-                <Image Grid.Column="1" HorizontalAlignment="Right" Source="D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\bin\Resources\Autodoc_Logo.png" Height="50" Margin="20"/>
+
+                <Image Height="50" Margin="20">
+                    <Image.Source>
+                        <BitmapImage UriSource="{Binding TitleImageDirectory}" />
+                    </Image.Source>
+                </Image>
+
+                <Image Grid.Column="1" HorizontalAlignment="Right" Height="50" Margin="20">
+                    <Image.Source>
+                        <BitmapImage UriSource="{Binding LogoImageDirectory}" />
+                    </Image.Source>
+                </Image>
+
             </Grid>
         </Border>
 
@@ -63,17 +72,49 @@
             <TextBlock Style="{StaticResource DescriptionStyle}">
                 AutoDocs is an application designed to automatically generate documentation based on your codebase. 
                 <LineBreak/>
-                By analyzing your code, it produces structured documentation that gives you insights into your classes, 
+                By analyzing your code, it produces structured documentation that gives you insights into your namespaces, classes, 
                 functions, variables, and more.
                 <LineBreak/>
-                <LineBreak/>
                 This ensures that you always have up-to-date and easily accessible documentation for your projects.
+                <LineBreak/>
+                <LineBreak/>
+                Use the text field bellow to enter the folder directory of your project, or use the button to locate it.
             </TextBlock>
         </Border>
 
-        <!-- Action Section -->
+        <!-- Button Section -->
         <Border Grid.Row="2" Padding="20" VerticalAlignment="Bottom" Background="White">
-            <Button Name="btnOpenFolder" Content="Open Folder" HorizontalAlignment="Center" Click="btnOpenFolder_Click" Style="{StaticResource ButtonStyle}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Button to open the folder -->
+                <Button Name="btnOpenFolder" 
+                Content="Open Folder" 
+                HorizontalAlignment="Center" 
+                Click="btnOpenFolder_Click" 
+                Style="{StaticResource ButtonStyle}" 
+                Grid.Column="0"/>
+
+                <!-- Text field to enter directory -->
+                <TextBox Name="txtDirectory" 
+                 Grid.Column="1" 
+                 Margin="0,0,128,0" 
+                 VerticalAlignment="Center" 
+                 Padding="10" Height="60" Grid.ColumnSpan="2"/>
+
+                <!-- Action button -->
+                <Button Name="btnAction" 
+                Content="Go" 
+                HorizontalAlignment="Center" 
+                Click="btnAction_Click" 
+                Style="{StaticResource ButtonStyle}" 
+                Grid.Column="2"/>
+            </Grid>
         </Border>
+
     </Grid>
 </Window>

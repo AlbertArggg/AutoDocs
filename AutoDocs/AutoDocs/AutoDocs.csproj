@@ -52,6 +52,12 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
+        <Compile Include="Resources\ResourceManager\ResourceManager.cs" />
+        <Compile Include="Structure\DTOs\Class.cs" />
+        <Compile Include="Structure\DTOs\Directory.cs" />
+        <Compile Include="Structure\DTOs\Function.cs" />
+        <Compile Include="Structure\DTOs\NameSpace.cs" />
+        <Compile Include="Structure\DTOs\Variable.cs" />
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
