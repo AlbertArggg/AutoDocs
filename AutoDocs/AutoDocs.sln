@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoDocs", "AutoDocs\AutoDocs.csproj", "{0B38E075-7C03-4358-9A0A-03A095A20F10}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B38E075-7C03-4358-9A0A-03A095A20F10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B38E075-7C03-4358-9A0A-03A095A20F10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B38E075-7C03-4358-9A0A-03A095A20F10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B38E075-7C03-4358-9A0A-03A095A20F10}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
