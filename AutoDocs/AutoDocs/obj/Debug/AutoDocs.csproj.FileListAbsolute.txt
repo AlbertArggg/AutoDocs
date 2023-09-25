@@ -2,15 +2,13 @@ D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\bin\Debug\AutoDocs.exe.config
 D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\bin\Debug\AutoDocs.exe
 D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\bin\Debug\AutoDocs.pdb
 D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\obj\Debug\AutoDocs.csproj.AssemblyReference.cache
-D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\obj\Debug\AutoDocs.csproj.SuggestedBindingRedirects.cache
-D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\obj\Debug\MainWindow.g.cs
 D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\obj\Debug\App.g.cs
 D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\obj\Debug\AutoDocs_MarkupCompile.cache
-D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\obj\Debug\AutoDocs_MarkupCompile.lref
-D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\obj\Debug\MainWindow.baml
 D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\obj\Debug\AutoDocs.g.resources
 D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\obj\Debug\AutoDocs.Properties.Resources.resources
 D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\obj\Debug\AutoDocs.csproj.GenerateResource.cache
 D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\obj\Debug\AutoDocs.csproj.CoreCompileInputs.cache
 D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\obj\Debug\AutoDocs.exe
 D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\obj\Debug\AutoDocs.pdb
+D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\obj\Debug\MainWindow.baml
+D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\obj\Debug\MainWindow.g.cs
