@@ -12,3 +12,4 @@ D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\obj\Debug\AutoDocs.exe
 D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\obj\Debug\AutoDocs.pdb
 D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\obj\Debug\MainWindow.baml
 D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\obj\Debug\MainWindow.g.cs
+D:\GithubRepos\AutoDocs\AutoDocs\AutoDocs\obj\Debug\AutoDocs.csproj.SuggestedBindingRedirects.cache

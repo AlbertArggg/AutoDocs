@@ -54,8 +54,11 @@
     <Compile Include="Resources\ResourceManager\ResourceManager.cs" />
     <Compile Include="Structure\DTOs\Class.cs" />
     <Compile Include="Structure\DTOs\Directory.cs" />
+    <Compile Include="Structure\DTOs\Documentation.cs" />
+    <Compile Include="Structure\DTOs\File.cs" />
     <Compile Include="Structure\DTOs\Function.cs" />
     <Compile Include="Structure\DTOs\NameSpace.cs" />
+    <Compile Include="Structure\DTOs\Parameter.cs" />
     <Compile Include="Structure\DTOs\Variable.cs" />
     <Compile Include="ViewsAndModels\MainViewModel.cs" />
     <Page Include="MainWindow.xaml">
