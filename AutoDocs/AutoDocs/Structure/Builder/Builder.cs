@@ -29,7 +29,7 @@ namespace AutoDocs.Structure.Builder
                 .Select(f => BuildFileStructure(f.FullName))
                 .ToList();
             
-            string icon = "path_to_icon_based_on_some_logic";
+            string icon = IconManager.GetDirectoryIcon();
             
             return new DTOs.Directory(directoryInfo.Name, directoryInfo.FullName, icon, directories, classes, files);
         }
@@ -49,11 +49,11 @@ namespace AutoDocs.Structure.Builder
                 {
                     var className = classNode.Identifier.Text;
                     var classDirectory = Path.GetDirectoryName(filePath);
-                    string classIcon = "path_to_icon_based_on_some_logic";
+                    string classIcon = IconManager.GetCsFileIcon(filePath);
 
                     var variables = classNode.DescendantNodes()
                         .OfType<PropertyDeclarationSyntax>()
-                        .Select(p => new Variable(p.Type.ToString(), p.Identifier.ToString()))
+                        .Select(p => new Variable(p.Type.ToString(), p.Identifier.ToString(), p.Modifiers.FirstOrDefault().Text ?? "default"))
                         .ToList();
 
                     var functions = classNode.DescendantNodes()
@@ -75,7 +75,7 @@ namespace AutoDocs.Structure.Builder
         private static DTOs.File BuildFileStructure(string filePath)
         {
             var fileInfo = new FileInfo(filePath);
-            string iconName = null;
+            string iconName = IconManager.GetFileIcon(filePath);
             return new DTOs.File(fileInfo.Name, fileInfo.DirectoryName, iconName);
         }
         
