@@ -1,16 +1,16 @@
 ﻿using System.Windows;
 using System.Windows.Forms;
 using AutoDocs.Resources.ResourceManager;
+using AutoDocs.Structure.Builder;
+using AutoDocs.Structure.DTOs;
+using File = System.IO.File;
 
 namespace AutoDocs
 {
     public partial class MainWindow
     {
-        private ResourceManager _resourceManager;
-
         public MainWindow()
         {
-            _resourceManager = new ResourceManager();
             this.DataContext = new MainViewModel();
 
             InitializeComponent();
@@ -31,7 +31,8 @@ namespace AutoDocs
 
         private void btnAction_Click(object sender, RoutedEventArgs e)
         {
-            // launch application
+            Directory MainDirectory = Builder.BuildCodeStructure(txtDirectory.Text);
+            File.WriteAllText("output.txt", MainDirectory.ToString());
         }
     }
 }

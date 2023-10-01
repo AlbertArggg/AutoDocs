@@ -11,7 +11,7 @@ namespace AutoDocs.Structure.DTOs
         public List<Function> Functions {get; set;}
         public List<Documentation> Documentations {get; set;}
 
-        public Function(string _name, string _dir, string _icon, List<Parameter> _params)
+        public Function(string _name, string _dir, string _icon, List<Parameter> _params, List<Documentation> _docs = null)
         {
             FunctionName = _name;
             ClassIcon = _icon;

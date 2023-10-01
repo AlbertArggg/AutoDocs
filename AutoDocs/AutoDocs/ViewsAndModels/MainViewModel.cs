@@ -13,6 +13,15 @@ namespace AutoDocs
         private string _directory;
         private ResourceManager _resourceManager;
 
+        
+        public ICommand RunCommand
+        {
+            get
+            {
+                return new RelayCommand(() => )
+            }
+        }
+
         public MainViewModel()
         {
             _resourceManager = new ResourceManager();
@@ -38,6 +47,8 @@ namespace AutoDocs
         {
             return System.IO.Directory.Exists(path);
         }
+        
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
 
