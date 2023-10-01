@@ -84,6 +84,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ExtensionMethods\StringMethods.cs" />
     <Compile Include="Resources\ResourceManager\ResourceManager.cs" />
     <Compile Include="Structure\Builder\Builder.cs" />
     <Compile Include="Structure\Builder\IconManager.cs" />

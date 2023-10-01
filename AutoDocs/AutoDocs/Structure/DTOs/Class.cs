@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
+using AutoDocs.ExtensionMethods;
 
 namespace AutoDocs.Structure.DTOs
 {
@@ -9,7 +11,9 @@ namespace AutoDocs.Structure.DTOs
         public string ClassName { get; private set; }
         public string ClassDirectory { get; private set; }
         public string ClassIcon { get; private set; }
-        
+
+        public string ClassDisplayName { get; private set; }
+
         public List<Variable> Variables {get; set;}
         public List<Function> Functions {get; set;}
         public List<Documentation> Documentations {get; set;}
@@ -17,6 +21,7 @@ namespace AutoDocs.Structure.DTOs
         public Class(string _name, string _dir, string _icon, List<Variable> _vars, List<Function> _func, List<Documentation> _docs = null)
         {
             ClassName = _name;
+            ClassDisplayName = _name.SplitOnUpperCase();
             ClassDirectory = _dir;
             ClassIcon = _icon;
             Variables = _vars;
@@ -64,6 +69,25 @@ namespace AutoDocs.Structure.DTOs
 
                 return writer.ToString();
             }
+        }
+
+        public string GenerateClassHtml()
+        {
+            StringBuilder sb = new StringBuilder();
+            
+            // ClassIcon
+            // ClassName
+            // ClassDirectory
+            
+            // Variables
+            sb.AppendLine("<div class=\"variable-list\">");
+            sb.AppendLine("    <div class=\"subsection-title\"> Variables </div>");
+            foreach (Variable var in Variables) { var.GenerateVariableHtml(); }
+            sb.AppendLine("</div>");
+            
+            // Functions
+            // Documentations
+            return sb.ToString();
         }
     }
 }

@@ -10,11 +10,6 @@ namespace AutoDocs
         public VariableViewModel()
         {
             Variables = new ObservableCollection<Variable>();
-            Variables.Add(new Variable("Test 1", "float", "private"));
-            Variables.Add(new Variable("Test 2", "float", "private"));
-            Variables.Add(new Variable("Test 3", "float", "private"));
-            Variables.Add(new Variable("Test 4", "float", "private"));
-            Variables.Add(new Variable("Test 5", "float", "private"));
         }
     }
 }
