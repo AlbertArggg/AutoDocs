@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -12,16 +12,7 @@ namespace AutoDocs
     {
         private string _directory;
         private ResourceManager _resourceManager;
-
         
-        public ICommand RunCommand
-        {
-            get
-            {
-                return new RelayCommand(() => )
-            }
-        }
-
         public MainViewModel()
         {
             _resourceManager = new ResourceManager();
@@ -47,8 +38,6 @@ namespace AutoDocs
         {
             return System.IO.Directory.Exists(path);
         }
-        
-        
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -56,7 +45,6 @@ namespace AutoDocs
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
         public string TitleImageDirectory { get { return _resourceManager.GetTitleImageDirectory(); } }
         public string LogoImageDirectory { get { return _resourceManager.GetLogoImageDirectory(); } }
     }
