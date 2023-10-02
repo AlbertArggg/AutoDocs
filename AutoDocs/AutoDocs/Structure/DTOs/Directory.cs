@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 
 namespace AutoDocs.Structure.DTOs
 {
@@ -20,6 +21,52 @@ namespace AutoDocs.Structure.DTOs
             Directories = _directories;
             Classes = _classes;
             Files = _files;
+        }
+        
+        public override string ToString()
+        {
+            using (StringWriter writer = new StringWriter())
+            {
+                AppendToString(writer, 0);
+                return writer.ToString();
+            }
+        }
+
+        private void AppendToString(StringWriter writer, int indentLevel)
+        {
+            var indent = new string('\t', indentLevel);
+            writer.WriteLine($"{indent}Directory Name: {DirectoryName}");
+            writer.WriteLine($"{indent}Path: {Path}");
+            writer.WriteLine($"{indent}Icon: {Icon}");
+            
+            
+            if (Directories != null && Directories.Count>0)
+            {
+                writer.WriteLine($"{indent}Sub-directories:");
+                foreach (var dir in Directories)
+                {
+                    writer.WriteLine($"{indent}\t{dir.DirectoryName} at {dir.Path}");
+                    dir.AppendToString(writer, indentLevel + 1);
+                }
+            }
+
+            if (Classes != null && Classes.Count>0)
+            {
+                writer.WriteLine($"{indent}Classes:");
+                foreach (var cls in Classes)
+                {
+                    writer.WriteLine($"\t{cls}");
+                }
+            }
+
+            if (Files != null && Files.Count>0)
+            {
+                writer.WriteLine($"{indent}Files:");
+                foreach (var file in Files)
+                {
+                    writer.WriteLine($"{indent}\t{file.FileName} at {file.FileDirectory}");
+                }
+            }
         }
     }
 }

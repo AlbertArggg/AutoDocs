@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="AutoDocs.ViewsAndModels.VariableUIComponent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:AutoDocs.ViewsAndModels"
+             mc:Ignorable="d"
+             d:DesignWidth="1000">
+
+    <UserControl.Resources>
+        <local:AccessModifierToColorConverter x:Key="AccessModifierToColorConverter" />
+    </UserControl.Resources>
+    
+    <Border BorderBrush="#555" BorderThickness="0 0 0 0.3" CornerRadius="0" Background="{StaticResource BackgroundBrush}" Padding="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Orientation="Horizontal">
+                <Rectangle Width="10" Height="10" Fill="{Binding AccessModifier, Converter={StaticResource ModifierConverter}}" Margin="0,0,10,0" />
+                <TextBlock Text="{Binding VariableName}" Foreground="#3A2AA2" FontWeight="Bold"/>
+                <TextBlock Text="{Binding VariableType}" Foreground="#3A2AA2" FontStyle="Italic" Margin="5,0"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>
