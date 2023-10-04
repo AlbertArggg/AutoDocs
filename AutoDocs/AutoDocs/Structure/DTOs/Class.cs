@@ -11,19 +11,24 @@ namespace AutoDocs.Structure.DTOs
         public string ClassName { get; private set; }
         public string ClassDirectory { get; private set; }
         public string ClassIcon { get; private set; }
+        
+        public string FunctionIcon { get; private set; }
+
+        public string VariableIcon { get; private set; }
 
         public string ClassDisplayName { get; private set; }
-
         public List<Variable> Variables {get; set;}
         public List<Function> Functions {get; set;}
         public List<Documentation> Documentations {get; set;}
 
-        public Class(string _name, string _dir, string _icon, List<Variable> _vars, List<Function> _func, List<Documentation> _docs = null)
+        public Class(string _name, string _dir, string _icon, string _funcIcon, string _varIcon ,List<Variable> _vars, List<Function> _func, List<Documentation> _docs = null)
         {
             ClassName = _name;
             ClassDisplayName = _name.SplitOnUpperCase();
             ClassDirectory = _dir;
             ClassIcon = _icon;
+            FunctionIcon = _funcIcon;
+            VariableIcon = _varIcon;
             Variables = _vars;
             Functions = _func;
             Documentations = _docs;
@@ -81,6 +86,8 @@ namespace AutoDocs.Structure.DTOs
             
             // Variables
             sb.AppendLine("<div class=\"variable-list\">");
+
+            sb.AppendLine($"<div class=\"subsection-title\"> <img src=\"{VariableIcon}\" width=\"30px\", height=\"30px\"> Variables </div>");
             sb.AppendLine("    <div class=\"subsection-title\"> Variables </div>");
             foreach (Variable var in Variables) { var.GenerateVariableHtml(); }
             sb.AppendLine("</div>");

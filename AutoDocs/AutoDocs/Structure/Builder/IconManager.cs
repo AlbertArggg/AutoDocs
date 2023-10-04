@@ -13,7 +13,9 @@ namespace AutoDocs.Structure.Builder
         private const string 
             _IconLocation = "Resources\\FileTypeIcons",
             _FileEnding = ".png",
-            _Directory = "Directory";
+            _Directory = "Directory",
+            _Function = "Function",
+            _Variable = "Variable";
         
         private const string 
             _3DFileObject = "3DFile", 
@@ -88,6 +90,8 @@ namespace AutoDocs.Structure.Builder
         };
 
         public static string GetDirectoryIcon() { return $"{_IconLocation}\\{_Directory}{_FileEnding}"; }
+        public static string GetFunctionIcon() { return $"{_IconLocation}\\{_Function}{_FileEnding}"; }
+        public static string GetVariableIcon() { return $"{_IconLocation}\\{_Variable}{_FileEnding}"; }
 
         public static string GetFileIcon(string file)
         {

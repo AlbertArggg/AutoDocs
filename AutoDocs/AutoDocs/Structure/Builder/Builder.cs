@@ -49,7 +49,9 @@ namespace AutoDocs.Structure.Builder
                 {
                     var className = classNode.Identifier.Text;
                     var classDirectory = Path.GetDirectoryName(filePath);
-                    string classIcon = IconManager.GetCsFileIcon(filePath);
+                    var classIcon = IconManager.GetCsFileIcon(filePath);
+                    var funcIcon = IconManager.GetFunctionIcon();
+                    var varIcon = IconManager.GetVariableIcon();
 
                     var variables = classNode.DescendantNodes()
                         .OfType<PropertyDeclarationSyntax>()
@@ -61,7 +63,7 @@ namespace AutoDocs.Structure.Builder
                         .Select(BuildFunctionStructure)
                         .ToList();
 
-                    return new Class(className, classDirectory, classIcon, variables, functions);
+                    return new Class(className, classDirectory, classIcon, funcIcon, varIcon, variables, functions);
                 }).ToList();
             }
             catch(Exception ex)
@@ -82,18 +84,20 @@ namespace AutoDocs.Structure.Builder
         private static Function BuildFunctionStructure(MethodDeclarationSyntax methodNode)
         {
             var functionName = methodNode.Identifier.Text;
-            string functionIcon = "default_function_icon";
+            var AccessModifier = methodNode.Modifiers.FirstOrDefault();
 
             var parameters = methodNode.ParameterList.Parameters
                 .Select(p => new Parameter(p.Identifier.ToString(), p.Type?.ToString()))
                 .ToList();
             
-            var nestedFunctions = methodNode.DescendantNodes()
+            var nestedFunctionsList = methodNode.DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .Select(BuildFunctionStructure)
                 .ToList();
+            
+            var functionContent = methodNode.Body?.ToFullString() ?? "";
 
-            return new Function(functionName, methodNode.ToString(), functionIcon, parameters);
+            return new Function(functionName, AccessModifier.ToString(), methodNode.ToString(), functionContent, parameters, nestedFunctionsList);
         }
 
         private static string GetXmlElementValue(XDocument doc, string elementName)
