@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace AutoDocs.Structure.DTOs
 {
@@ -67,6 +68,101 @@ namespace AutoDocs.Structure.DTOs
                     writer.WriteLine($"{indent}\t{file.FileName} at {file.FileDirectory}");
                 }
             }
+        }
+
+        /*
+        public string GenerateDirectoryHTML()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("<div class=\"directory-container\">");
+    
+            sb.AppendLine("<div class=\"title-container\">");
+            sb.AppendFormat($"<img src=\"{Icon}\" alt=\"Directory Icon\" width=\"30px\", height=\"30px\" class=\"directory-icon\">\n");
+            sb.AppendFormat($"<span class=\"directory-name\">{DirectoryName}</span>\n");
+            sb.AppendLine("</div>");
+
+            sb.AppendLine("<div class=\"directory-info-container\">");
+            sb.AppendFormat($"<p><strong>Path: </strong> {Path} </p>\n");
+            sb.AppendLine("</div>");
+
+            if (Directories.Count > 0)
+            {
+                sb.AppendLine("<div class=\"nested-directories\">");
+                sb.AppendLine("<p><strong>Nested Directories: </strong></p>");
+                foreach(Directory dir in Directories)
+                {
+                    sb.AppendLine(dir.GenerateDirectoryHTML());
+                }
+                sb.AppendLine("    </div>");   
+            }
+
+            if (Files.Count > 0)
+            {
+                sb.AppendLine("    <div class=\"nested-files\">");
+                sb.AppendLine("        <p><strong>Nested Files: </strong></p>");
+                foreach(File file in Files)
+                {
+                    sb.AppendLine(file.GenerateFileHtml());
+                }
+                sb.AppendLine("    </div>");
+            }
+
+            if (Classes.Count > 0)
+            {
+                sb.AppendLine("    <div class=\"nested-classes\">");
+                sb.AppendLine("        <p><strong>Nested Classes: </strong></p>");
+                foreach(Class cls in Classes)
+                {
+                    sb.AppendLine(cls.GenerateClassHtml());
+                }
+                sb.AppendLine("    </div>");
+            }
+            
+            sb.AppendLine("</div>");
+            return sb.ToString();
+        }
+        */
+        
+        public string GenerateDirectoryHTML()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("<details open>");
+            sb.AppendLine("<summary>");
+            sb.AppendFormat($"<img src=\"{Icon}\" alt=\"Directory Icon\" width=\"30px\", height=\"30px\" class=\"directory-icon\"> ");
+            sb.AppendFormat($"<span class=\"directory-name\">{DirectoryName}</span>");
+            sb.AppendLine("</summary>");
+
+            sb.AppendLine("<ul>");
+
+            foreach (Directory dir in Directories)
+            {
+                sb.AppendLine("<li>");
+                sb.AppendLine(dir.GenerateDirectoryHTML());
+                sb.AppendLine("</li>");
+            }
+
+            foreach (File file in Files)
+            {
+                sb.AppendLine("<li>");
+                sb.AppendFormat($"<img src=\"{file.Icon}\" alt=\"File Icon\" width=\"30px\", height=\"30px\" class=\"file-icon\"> ");
+                sb.AppendLine($"<span class=\"file-name\">{file.FileDisplayName}</span>");
+                sb.AppendLine("</li>");
+            }
+
+            foreach (Class cls in Classes)
+            {
+                sb.AppendLine("<li>");
+                sb.AppendFormat($"<img src=\"{cls.ClassIcon}\" alt=\"Class Icon\" width=\"30px\", height=\"30px\" class=\"class-icon\"> ");
+                sb.AppendLine($"<a href=\"{cls.ClassName}.html\" class=\"class-name\">{cls.ClassDisplayName}</a>");
+                cls.BuildClassHtmlFile();
+                sb.AppendLine("</li>");
+            }
+
+            sb.AppendLine("</ul>");
+            sb.AppendLine("</details>");
+
+            return sb.ToString();
         }
     }
 }

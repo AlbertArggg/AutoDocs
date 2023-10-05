@@ -1,7 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using AutoDocs.ExtensionMethods;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Formatting;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Text;
 
 namespace AutoDocs.Structure.DTOs
 {
@@ -17,6 +22,7 @@ namespace AutoDocs.Structure.DTOs
         public List<Function> Functions {get; private set;}
 
         public List<Documentation> Documentations = new List<Documentation>();
+        private static AdhocWorkspace _workSpace;
 
         public Function(string _name, string _accMod, string _dir, string _cont, List<Parameter> _params, List<Function> _nestFunc)
         {
@@ -25,8 +31,37 @@ namespace AutoDocs.Structure.DTOs
             Parameters = _params;
             FunctionDisplayName = _name.SplitOnUpperCase();
             FunctionContent = _cont;
-            Node = _dir;
+            Node = Deindent(_dir);
+            Console.WriteLine(Node);
             Functions = _nestFunc;
+        }
+        
+        public static string Deindent(string input)
+        {
+            // 1. Create a syntax tree from your input string
+            AdhocWorkspace workspace = new AdhocWorkspace();
+            workspace.AddSolution(SolutionInfo.Create(SolutionId.CreateNewId("formatter"), VersionStamp.Default));
+            
+            // 2. Setup a workspace and project
+            ProjectId projectId = ProjectId.CreateNewId();
+            Solution solution = workspace.CurrentSolution
+                .AddProject(projectId, "AdhocProject", "AdhocProject", LanguageNames.CSharp)
+                .WithProjectCompilationOptions(projectId, new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary))
+                .AddMetadataReference(projectId, MetadataReference.CreateFromFile(typeof(object).Assembly.Location))
+                .AddMetadataReference(projectId, MetadataReference.CreateFromFile(typeof(Console).Assembly.Location));
+    
+            // 3. Create a document from the syntax tree and add it to the project
+            DocumentId documentId = DocumentId.CreateNewId(projectId);
+            solution = solution.AddDocument(documentId, "AdhocDocument.cs", SourceText.From(input));
+            Document document = solution.GetDocument(documentId);
+    
+            // 4. Use the `Formatter` to format the document
+            SyntaxNode formattedRoot = Formatter.Format(document.GetSyntaxRootAsync().Result, workspace);
+    
+            // 5. Extract the formatted text
+            string formattedText = formattedRoot.ToFullString();
+    
+            return formattedText;
         }
         
         public string BuildFunctionHtml()
@@ -41,7 +76,6 @@ namespace AutoDocs.Structure.DTOs
             sb.AppendLine("</div>");
             sb.AppendLine("<div class=\"function-details\">");
             sb.AppendLine($"<div class=\"field\"><strong class=\"fieldName\">Function Name:</strong> <span class=\"fieldValue\">{FunctionName}</span></div>");
-            sb.AppendLine($"<div class=\"field\"><strong class=\"fieldName\">Node:</strong> <span class=\"fieldValue\">{Node}</span></div>");
 
             if (Parameters.Count > 0)
             {
@@ -68,7 +102,9 @@ namespace AutoDocs.Structure.DTOs
             }
 
             sb.AppendLine("<div class=\"function-content\">");
-            sb.AppendLine($"<pre><code class=\"cs\"><strong>{FunctionContent}</strong></code></pre>");
+            sb.AppendLine($"<pre><code class=\"cs\"><strong>");
+            sb.AppendLine($"{Node}");
+            sb.AppendLine("</strong></code></pre>");
             sb.AppendLine("</div>");
 
             if (Functions.Count > 0)

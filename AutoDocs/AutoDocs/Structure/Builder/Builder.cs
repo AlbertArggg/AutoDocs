@@ -25,7 +25,9 @@ namespace AutoDocs.Structure.Builder
                 .ToList();
             
             var files = directoryInfo.GetFiles()
-                .Where(f => f.Extension != ".cs")
+                .Where(f => !new[] { ".cs", ".meta", ".pdb", ".o", ".bak", ".rsuser", ".suo", ".user", ".userosscache", ".sln.docstates", "Thumbs.db", "ehthumbs.db", ".cab", ".msi", ".msm", ".msp", ".lnk", ".log", ".lock.json", ".fragment.lock.json", ".proj.user"
+                            }.Contains(f.Extension) && !new[] { "$RECYCLE.BIN", ".vscode", "Library", "Temp", "obj", "Build", "Builds", "_ReSharper", ".vs", ".idea"
+                            }.Any(d => f.FullName.Contains(d)))
                 .Select(f => BuildFileStructure(f.FullName))
                 .ToList();
             

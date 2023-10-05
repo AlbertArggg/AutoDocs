@@ -1,0 +1,68 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #282c34;
+    color: #fff;
+    margin: 40px;
+}
+
+details {
+    border-left: 2px solid #3498db;
+    margin: 8px 0;
+    transition: all 0.3s;
+}
+
+details[open] {
+    margin-left: 20px;
+    border-left: 2px solid transparent;
+    padding-left: 10px;
+}
+
+summary {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: all 0.3s;
+}
+
+summary:hover {
+    color: #3498db;
+}
+
+img.directory-icon, img.file-icon, img.class-icon {
+    margin-right: 10px;
+    width: 24px;
+    height: 24px;
+    transition: all 0.3s;
+    filter: invert(1);  /* Makes the icons white. Remove if your icons are already suited for a dark theme. */
+}
+
+img.directory-icon:hover, img.file-icon:hover, img.class-icon:hover {
+    transform: scale(1.1);
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+li {
+    margin: 5px 0;
+    transition: all 0.3s;
+}
+
+li:hover {
+    color: #3498db;
+}
+
+a.class-name {
+    text-decoration: none;
+    color: #f39c12;
+    transition: all 0.3s;
+}
+
+a.class-name:hover {
+    color: #f1c40f;
+    text-decoration: underline;
+}

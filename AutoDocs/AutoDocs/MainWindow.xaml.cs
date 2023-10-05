@@ -1,8 +1,11 @@
-﻿using System.Windows;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Windows;
 using System.Windows.Forms;
 using AutoDocs.Resources.ResourceManager;
 using AutoDocs.Structure.Builder;
-using AutoDocs.Structure.DTOs;
+using Directory = AutoDocs.Structure.DTOs.Directory;
 using File = System.IO.File;
 
 namespace AutoDocs
@@ -33,6 +36,16 @@ namespace AutoDocs
         {
             Directory MainDirectory = Builder.BuildCodeStructure(txtDirectory.Text);
             File.WriteAllText("output.txt", MainDirectory.ToString());
+            
+            var outputPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "OutputHTML");
+            if (!System.IO.Directory.Exists(outputPath))
+            {
+                System.IO.Directory.CreateDirectory(outputPath);
+            }
+            
+            var filePath = Path.Combine(outputPath, "index.html");
+            System.IO.File.WriteAllText(filePath, HTMLBuilder.GenerateIndexHtml(MainDirectory));
+            Process.Start(filePath);
         }
     }
 }
